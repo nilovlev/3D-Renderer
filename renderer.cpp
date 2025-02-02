@@ -5,11 +5,11 @@ namespace renderer {
 Renderer::Renderer(Screen& screen) : screen_(screen) {
 }
 
-double triangleSignedArea(double ax, double ay, double bx, double by, double cx, double cy) {
+double Renderer::triangleSignedArea(double ax, double ay, double bx, double by, double cx, double cy) {
   return ((bx - ax) * (cy - ay) - (by - ay) * (cx - ax)) / 2;
 }
 
-bool isInsideTriangle(double x, double y, const Triangle& triangle) {
+bool Renderer::isInsideTriangle(double x, double y, const Triangle& triangle) {
   double abv = triangleSignedArea(triangle.a.x(), triangle.a.y(), triangle.b.x(), triangle.b.y(), x, y);
   double bcv = triangleSignedArea(triangle.b.x(), triangle.b.y(), triangle.c.x(), triangle.c.y(), x, y);
   double cav = triangleSignedArea(triangle.c.x(), triangle.c.y(), triangle.a.x(), triangle.a.y(), x, y);
@@ -17,7 +17,6 @@ bool isInsideTriangle(double x, double y, const Triangle& triangle) {
 }
 
 void Renderer::rasterizeTriangle(const Triangle& triangle) {
-
   int minX = std::min(triangle.a.x(), std::min(triangle.b.x(), triangle.c.x()));
   int minY = std::min(triangle.a.y(), std::min(triangle.b.y(), triangle.c.y()));
   int maxX = std::max(triangle.a.x(), std::max(triangle.b.x(), triangle.c.x()));
