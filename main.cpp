@@ -1,9 +1,11 @@
+#include "application.h"
 #include "except.h"
 
 int main() {
   try {
-    
-  } catch(...) {
+    renderer::Application application;
+    application.run();
+  } catch (...) {
     except::react();
   }
   return 0;
