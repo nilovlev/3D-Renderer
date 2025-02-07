@@ -15,6 +15,6 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(3D-Renderer main.cpp application.cpp except.cpp renderer.cpp screen.cpp)
+add_executable(3D-Renderer main.cpp application.cpp except.cpp world.cpp renderer.cpp object.cpp screen.cpp)
 
 target_link_libraries(3D-Renderer PRIVATE SFML::Graphics)

@@ -7,11 +7,12 @@ namespace renderer {
 
 class Application {
  private:
+  World world_;
   Renderer renderer_;
   Screen screen_;
 
  public:
-  Application();
+  Application() = default;
   void run();
 };
 
