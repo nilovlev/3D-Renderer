@@ -1,8 +1,8 @@
 #pragma once
 
-#include <vector>
-
 #include "triangle.h"
+
+#include <vector>
 
 namespace renderer {
 

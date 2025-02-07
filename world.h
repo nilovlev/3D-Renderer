@@ -1,8 +1,8 @@
 #pragma once
 
-#include <vector>
-
 #include "object.h"
+
+#include <vector>
 
 namespace renderer {
 
@@ -12,7 +12,7 @@ class World {
 
  public:
   World() = default;
-	void addObject(const Object& object);
+  void addObject(const Object& object);
   const std::vector<Object>& getObjects() const;
 };
 
