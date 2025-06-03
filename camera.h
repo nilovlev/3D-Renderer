@@ -22,7 +22,8 @@ class Camera {
  public:
   Camera(int screenWidth, int screenHeight);
   Matrix4 viewProjectionMatrix() const;
-  Matrix4 viewMatrix() const;
+  Vector3 position() const;
+  Vector3 target() const;
 
   void moveForward(float distance);
   void moveBackward(float distance);

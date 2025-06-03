@@ -57,8 +57,12 @@ Matrix4 Camera::viewProjectionMatrix() const {
   return projectionMatrix_ * viewMatrix_;
 }
 
-Matrix4 Camera::viewMatrix() const {
-  return viewMatrix_;
+Vector3 Camera::position() const {
+  return position_;
+}
+
+Vector3 Camera::target() const {
+  return target_;
 }
 
 void Camera::moveForward(float distance) {

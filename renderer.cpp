@@ -16,8 +16,7 @@ int Renderer::toDiscreteCeil(float coord) {
   return static_cast<int>(std::ceil(coord));
 }
 
-Screen Renderer::rasterizeTriangle(const Triangle& triangle, Screen&& screen,
-                                   const Matrix4& viewMatrix) const {
+Screen Renderer::rasterizeTriangle(const Triangle& triangle, Screen&& screen, const Vector3& light) const {
   Vector2 a2(triangle.a.x(), triangle.a.y());
   Vector2 b2(triangle.b.x(), triangle.b.y());
   Vector2 c2(triangle.c.x(), triangle.c.y());
@@ -31,9 +30,6 @@ Screen Renderer::rasterizeTriangle(const Triangle& triangle, Screen&& screen,
   int maxY = std::max(toDiscreteCeil(triangle.a.y()),
                       std::max(toDiscreteCeil(triangle.b.y()), toDiscreteCeil(triangle.c.y())));
 
-  Vector4 lightView(0, 0, -1, 0);
-  Vector4 lightWorld4 = viewMatrix.inverse() * lightView;
-  Vector3 light = lightWorld4.head<3>().normalized();
   float area = triangleSignedArea(a2, b2, c2);
   if (area == 0.0f) return std::move(screen);
 
@@ -91,11 +87,11 @@ Triangle Renderer::projectTriangle(const Triangle& triangle, const Matrix4& vp, 
 
 Screen Renderer::render(const World& world, Screen&& screen, const Camera& camera) const {
   Matrix4 vp = camera.viewProjectionMatrix();
-  Matrix4 viewMatrix = camera.viewMatrix();
+  Vector3 light = (camera.target() - camera.position()).normalized();
   for (const auto& object : world.objects()) {
     for (const auto& triangle : object.triangles()) {
       Triangle projectedTriangle = projectTriangle(triangle, vp, screen.width(), screen.height());
-      screen = rasterizeTriangle(projectedTriangle, std::move(screen), viewMatrix);
+      screen = rasterizeTriangle(projectedTriangle, std::move(screen), light);
     }
   }
   return std::move(screen);
