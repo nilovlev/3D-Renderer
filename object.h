@@ -1,8 +1,8 @@
 #pragma once
 
-#include "triangle.h"
-
 #include <vector>
+
+#include "triangle.h"
 
 namespace renderer {
 
@@ -12,9 +12,10 @@ class Object {
 
  public:
   Object() = default;
-  Object(const std::vector<Triangle>& triangles);
+  Object(std::vector<Triangle>&& triangles);
   void addTriangle(const Triangle& triangle);
-  const std::vector<Triangle>& getTriangles() const;
+  void addTriangle(Triangle&& triangle);
+  const std::vector<Triangle>& triangles() const;
 };
 
 }  // namespace renderer

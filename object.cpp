@@ -2,14 +2,18 @@
 
 namespace renderer {
 
-Object::Object(const std::vector<Triangle>& triangles) : triangles_(triangles) {
+Object::Object(std::vector<Triangle>&& triangles) : triangles_(std::move(triangles)) {
 }
 
 void Object::addTriangle(const Triangle& triangle) {
   triangles_.push_back(triangle);
 }
 
-const std::vector<Triangle>& Object::getTriangles() const {
+void Object::addTriangle(Triangle&& triangle) {
+  triangles_.push_back(std::move(triangle));
+}
+
+const std::vector<Triangle>& Object::triangles() const {
   return triangles_;
 }
 

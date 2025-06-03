@@ -1,15 +1,14 @@
 #pragma once
 
-#include <Eigen/Dense>
+#include "linalg.h"
+#include "color.h"
 
 namespace renderer {
 
-using Vertex = Eigen::Vector3f;
-
 struct Triangle {
-  Vertex a;
-  Vertex b;
-  Vertex c;
+  Vector3 a, b, c;
+  Vector3 normalA, normalB, normalC;
+  Color color;
 };
 
 }  // namespace renderer

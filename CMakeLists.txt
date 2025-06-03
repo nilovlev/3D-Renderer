@@ -4,6 +4,8 @@ project(3D-Renderer)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 include_directories("eigen")
 
 include(FetchContent)
@@ -15,6 +17,6 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(3D-Renderer main.cpp application.cpp except.cpp world.cpp renderer.cpp object.cpp screen.cpp)
+add_executable(3D-Renderer main.cpp application.cpp except.cpp world.cpp renderer.cpp object.cpp screen.cpp camera.cpp runtime.cpp view.cpp loader.cpp)
 
 target_link_libraries(3D-Renderer PRIVATE SFML::Graphics)

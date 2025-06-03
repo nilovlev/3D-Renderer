@@ -1,22 +1,24 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include <cstdint>
+#include <vector>
 
 namespace renderer {
 
 class Screen {
  private:
-  const uint32_t width_ = 600;
-  const uint32_t height_ = 400;
-  const std::string windowName_ = "3D-Renderer";
-  const sf::Color windowColor_ = sf::Color::Black;
-  sf::RenderWindow window_;
-  sf::Image image_;
+  int width_;
+  int height_;
+  std::vector<uint8_t> pixels_;
+  std::vector<float> zBuffer_;
 
  public:
-  Screen();
-  void setPixel(uint32_t x, uint32_t y, sf::Color color);
-  void show();
+  Screen(int width, int height);
+  void setPixel(uint32_t x, uint32_t y, uint8_t r, uint8_t g, uint8_t b, uint8_t a, float z);
+  void clear();
+  int width() const;
+  int height() const;
+  const std::vector<uint8_t>& pixels() const;
 };
 
 }  // namespace renderer

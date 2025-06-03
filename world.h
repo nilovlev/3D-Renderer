@@ -13,7 +13,8 @@ class World {
  public:
   World() = default;
   void addObject(const Object& object);
-  const std::vector<Object>& getObjects() const;
+  void addObject(Object&& object);
+  const std::vector<Object>& objects() const;
 };
 
 }  // namespace renderer

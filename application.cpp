@@ -1,19 +1,20 @@
 #include "application.h"
-#include "object.h"
-#include "triangle.h"
 
-#include <SFML/Graphics.hpp>
+#include "loader.h"
+#include "triangle.h"
 
 namespace renderer {
 
-void Application::run() {
-  const Triangle testTriangle = {{100, 100, 0}, {400, 200, 0}, {200, 300, 0}};
-  Object testObject;
-  testObject.addTriangle(testTriangle);
-  world_.addObject(testObject);
+Application::Application()
+    : runtime_(windowWidth_, windowHeight_, windowTitle_),
+      camera_(windowWidth_, windowHeight_),
+      view_(runtime_.window(), windowWidth_, windowHeight_) {
+}
 
-  renderer_.render(world_, screen_);
-  screen_.show();
+void Application::run() {
+  Object model = Loader::load("../models/kettle.obj");
+  world_.addObject(std::move(model));
+  runtime_.run(world_, renderer_, camera_, view_);
 }
 
 }  // namespace renderer

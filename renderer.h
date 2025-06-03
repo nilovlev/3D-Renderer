@@ -1,5 +1,7 @@
 #pragma once
 
+#include "camera.h"
+#include "linalg.h"
 #include "screen.h"
 #include "triangle.h"
 #include "world.h"
@@ -8,13 +10,17 @@ namespace renderer {
 
 class Renderer {
  private:
-  double triangleSignedArea(double ax, double ay, double bx, double by, double cx, double cy) const;
-  bool isInsideTriangle(double x, double y, const Triangle& triangle) const;
-  void rasterizeTriangle(const Triangle& triangle, Screen& screen);
+  float triangleSignedArea(const Vector2& a, const Vector2& b, const Vector2& c) const;
+  static int toDiscreteFloor(float coord);
+  static int toDiscreteCeil(float coord);
+  Screen rasterizeTriangle(const Triangle& triangle, Screen&& screen,
+                           const Matrix4& viewMatrix) const;
+  Triangle projectTriangle(const Triangle& triangle, const Matrix4& vp, int screenWidth,
+                           int screenHeight) const;
 
  public:
   Renderer() = default;
-  void render(World& world, Screen& screen);
+  Screen render(const World& world, Screen&& screen, const Camera& camera) const;
 };
 
 }  // namespace renderer
