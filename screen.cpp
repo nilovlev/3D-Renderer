@@ -1,6 +1,5 @@
 #include "screen.h"
 
-#include <iostream>
 #include <limits>
 
 namespace renderer {

@@ -1,7 +1,6 @@
 #include "renderer.h"
 
 #include <cstdint>
-#include <iostream>
 
 namespace renderer {
 
